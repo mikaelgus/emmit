@@ -4,8 +4,8 @@ Icons: https://heroicons.com/
 
 Folders:
 
-- public ->
--       media ->
--           audio
--           images
--           video
+public ->
+-- media ->
+--- audio
+--- images
+--- video

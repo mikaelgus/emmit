@@ -75,22 +75,22 @@ async function getJSON(mediaData, who) {
   console.log("mitä array sisältää", media);
   if (mediaData == audioFiles && who == "user") {
     isUser = true;
-    console.log("musiikkia luvassa", isUser);
+    //console.log("musiikkia luvassa", isUser);
 
     printMedia("mus");
   } else if (mediaData == videoFiles && who == "user") {
     isUser = true;
-    console.log("videoita tulossa", isUser);
+    //console.log("videoita tulossa", isUser);
 
     printMedia("vid");
   } else if (mediaData == audioFiles && who == "admin") {
     isUser = false;
-    console.log("musiikkia listataan", isUser);
+    //console.log("musiikkia listataan", isUser);
 
     printAdminMedia("mus");
   } else if (mediaData == videoFiles && who == "admin") {
     isUser = false;
-    console.log("videoita listataan", isUser);
+    //console.log("videoita listataan", isUser);
 
     printAdminMedia("vid");
   }
@@ -153,7 +153,7 @@ function showMusic() {
   sortingArea.style.display = "block";
   closeVideoPlayer();
   getJSON(audioFiles, "user");
-  console.log("musalinkkiä painettu");
+  //console.log("musalinkkiä painettu");
 }
 
 //print video cards
@@ -171,7 +171,7 @@ function showVideo() {
   closeVideoPlayer();
   closeAudioPlayer();
   getJSON(videoFiles, "user");
-  console.log("videolinkkiä painettu");
+  //console.log("videolinkkiä painettu");
 }
 
 //sortMedia
@@ -192,7 +192,6 @@ let sendMedClass = "";
 //sort by name a-ö
 sortName.onclick = () => {
   sortMedia();
-  console.log("WHAT IS USER? ", isUser);
   mediaSort == "audio.json" ? (sendMedClass = "mus") : (sendMedClass = "vid");
   if (isUser == true) {
     printMedia(sendMedClass);
@@ -215,12 +214,12 @@ let getFiles;
 //sort by age newest
 sortNew.onclick = () => {
   mediaSort == "audio.json" ? (getFiles = audioFiles) : (getFiles = videoFiles);
-  console.log("media json", media);
+  //console.log("media json", media);
   if (isUser == true) {
     getJSON(getFiles, "user")
       .then(function () {
         media.reverse();
-        console.log("media json käännetty", media);
+        //console.log("media json käännetty", media);
       })
       .then(function () {
         mediaSort == "audio.json"
@@ -232,7 +231,7 @@ sortNew.onclick = () => {
     getJSON(getFiles, "admin")
       .then(function () {
         media.reverse();
-        console.log("media json käännetty", media);
+        //console.log("media json käännetty", media);
       })
       .then(function () {
         mediaSort == "audio.json"
@@ -245,8 +244,8 @@ sortNew.onclick = () => {
 //sort by age oldest
 sortOld.onclick = () => {
   mediaSort == "audio.json" ? (getFiles = audioFiles) : (getFiles = videoFiles);
-  console.log("media json", media);
-  console.log("sort old user", isUser);
+  //console.log("media json", media);
+  //console.log("sort old user", isUser);
   if (isUser == true) {
     getJSON(getFiles, "user");
   } else if (isUser == false) {
@@ -255,21 +254,21 @@ sortOld.onclick = () => {
 };
 
 //close video player
-function closeVideoPlayer() {
+const closeVideoPlayer = () => {
   videoPlayerSection.style.display = "none";
   videoWindow.pause();
   videoSource.src = "";
-}
+};
 //close audio player
-function closeAudioPlayer() {
+const closeAudioPlayer = () => {
   musicPlayer.src = "";
   songTitle.innerHTML = "";
   timeInLine.style.width = 0;
   pauseButton.style.display = "none";
   playButton.style.display = "block";
-}
+};
 //print media cards
-function printMedia(medClass) {
+const printMedia = (medClass) => {
   mediaList.innerHTML = "";
   let mediaFunction = "";
   let mediaClass = "";
@@ -278,13 +277,11 @@ function printMedia(medClass) {
     playerSection.style.display = "flex";
     mediaClass = "audio/";
     mediaFunction = "playAudio";
-    console.log(mediaFunction);
   } else if (medClass == "vid") {
     pageHeader.innerHTML = "Videoita hyvinvointiisi";
     playerSection.style.display = "none";
     mediaClass = "video/";
     mediaFunction = "playVideo";
-    console.log(mediaFunction);
   }
 
   for (let i in media) {
@@ -317,20 +314,20 @@ function printMedia(medClass) {
       "</p>" +
       "</div></div>";
   }
-}
+};
 
 //show pause icon when audio playing
-function play_audio() {
+const play_audio = () => {
   musicPlayer.play();
   playButton.style.display = "none";
   pauseButton.style.display = "block";
-}
+};
 //show play icon when audio paused
-function pause_audio() {
+const pause_audio = () => {
   musicPlayer.pause();
   pauseButton.style.display = "none";
   playButton.style.display = "block";
-}
+};
 //update current audio duration
 function updatetime(e) {
   const { duration, currentTime } = e.srcElement;
@@ -349,28 +346,28 @@ function setTime(e) {
 //set volume slider to 100
 let volumeSliderValue = 100;
 //mute audio
-function audio_off() {
+const audio_off = () => {
   speakerOnButton.style.display = "none";
   speakerOffButton.style.display = "block";
   volumeSliderValue = volumeSlider.value;
   console.log("volume value: ", volumeSliderValue);
   musicPlayer.volume = 0;
   volumeSlider.value = 0;
-}
+};
 //unmute audio
-function audio_on() {
+const audio_on = () => {
   speakerOnButton.style.display = "block";
   speakerOffButton.style.display = "none";
   musicPlayer.volume = volumeSliderValue / 100;
   volumeSlider.value = volumeSliderValue;
-}
+};
 //set volume on slider
-function setVolume() {
+const setVolume = () => {
   musicPlayer.volume = volumeSlider.value / 100;
   checkVolumeValue();
-}
+};
 //check volume value on choose right icon
-function checkVolumeValue() {
+const checkVolumeValue = () => {
   console.log("check vol value: ", musicPlayer.volume);
   if (musicPlayer.volume === 0) {
     speakerOnButton.style.display = "none";
@@ -379,9 +376,9 @@ function checkVolumeValue() {
     speakerOnButton.style.display = "block";
     speakerOffButton.style.display = "none";
   }
-}
+};
 //print admin media lists
-function printAdminMedia(medClass) {
+const printAdminMedia = (medClass) => {
   console.log("Printataan", medClass);
   adminForms.innerHTML = "";
   adminForms.innerHTML +=
@@ -411,12 +408,12 @@ function printAdminMedia(medClass) {
       `)">${i}</button>` +
       "</td></tr>";
   }
-}
+};
 //admin media store media form
-function storeMedia() {
+const storeMedia = () => {
   adminForms.innerHTML = "";
   newMediaForm.style.display = "block";
-}
+};
 
 //get form data and send to store json
 function handleSubmit() {
@@ -577,23 +574,23 @@ const removeMedia = (ind, med) => {
 };
 
 //play an audio and show audio title
-function playAudio(media, name) {
+const playAudio = (media, name) => {
   console.log("Kappale: " + name);
   songTitle.innerHTML = name;
   musicPlayer.src = `/media/${media}`;
   musicPlayer.play();
   playButton.style.display = "none";
   pauseButton.style.display = "block";
-}
+};
 //play video
-function playVideo(media, name) {
+const playVideo = (media, name) => {
   pageHeader.innerHTML = name;
   mediaList.innerHTML = "";
   videoPlayerSection.style.display = "flex";
   videoWindow.load();
   videoSource.src = `/media/${media}`;
   sortingArea.style.display = "none";
-}
+};
 //listeners
 musicPlayer.addEventListener("timeupdate", updatetime);
 songTimeLine.addEventListener("click", setTime);

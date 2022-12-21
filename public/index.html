@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="output.css" rel="stylesheet" />
+    <title>Emmit - Myllypuron mediasoitin</title>
+  </head>
+  <body class="relative min-h-screen w-full bg-slate-800 text-slate-50">
+    <!-- sidebar -->
+    <div
+      class="sidebar fixed top-0 left-0 h-full w-44 bg-slate-800 text-slate-50 py-3.5 mx-2 border-x-2 border-slate-600"
+    >
+      <div class="sidebar_content mt-60">
+        <div class="logo_content flex justify-between w-full h-10 px-2">
+          <div class="logo">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="logo_icon w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                d="M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 10-2.636 6.364M16.5 12V8.25"
+              />
+            </svg>
+          </div>
+          <div class="logo_name font-medium">Emmit</div>
+          <div class="hamburger">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="menu_btn w-6 h-6 text-center rounded-md border border-slate-600 hover:bg-slate-600"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+              />
+            </svg>
+          </div>
+        </div>
+        <!-- navigation list -->
+        <ul class="nav_list mt-3" style="padding: 0 8px">
+          <li class="relative h-9 w-full text-center leading-9">
+            <a
+              href=""
+              class="flex flex-nowrap rounded-md px-2 transition ease-in-out delay-100 hover:bg-slate-500"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-10 leading-10 items-center"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                />
+              </svg>
+              <span class="links_name ml-4">Koti</span>
+            </a>
+            <!-- <span class="tooltip"></span> -->
+          </li>
+          <li class="relative h-9 w-full text-center leading-9">
+            <a
+              href=""
+              class="music_link flex flex-nowrap rounded-md px-2 transition ease-in-out delay-100 hover:bg-slate-500"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-10 leading-10"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z"
+                />
+              </svg>
+
+              <span class="links_name ml-4">Audiot</span>
+            </a>
+            <!-- <span class="tooltip"></span> -->
+          </li>
+          <li class="relative h-9 w-full text-center leading-9">
+            <a
+              href=""
+              class="video_link flex flex-nowrap rounded-md px-2 transition ease-in-out delay-100 hover:bg-slate-500"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-10 leading-10"
+              >
+                <path
+                  stroke-linecap="round"
+                  d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"
+                />
+              </svg>
+
+              <span class="links_name ml-4">Videot</span>
+            </a>
+            <!-- <span class="tooltip"></span> -->
+          </li>
+          <li class="relative h-9 w-full text-center leading-9">
+            <a
+              href=""
+              class="admin_link flex flex-nowrap rounded-md px-2 transition ease-in-out delay-100 hover:bg-slate-500"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-10 leading-10"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                />
+              </svg>
+
+              <span class="links_name ml-4">Admin </span>
+            </a>
+            <!-- <span class="tooltip"></span> -->
+          </li>
+          <!--           <li class="relative h-9 w-full text-center leading-9">
+            <a
+              href=""
+              class="quit_link flex flex-nowrap rounded-md px-2 transition ease-in-out delay-100 hover:bg-slate-500"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-10 leading-10"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+                />
+              </svg>
+
+              <span class="links_name ml-4">Lopeta</span>
+            </a>
+           <span class="tooltip"></span> 
+          </li> -->
+        </ul>
+      </div>
+      <div class="sorting_area mt-14" style="display: none">
+        <div class="sorting_info mb-2 flex justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6 mx-1"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
+            />
+          </svg>
+
+          <p class="sort_text" style="display: block">Lajittele:</p>
+        </div>
+        <div class="sorting_buttons grid justify-items-center w-full h-fit">
+          <button class="sorting_name_button sorting_button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
+              />
+            </svg>
+            <p class="sort_text" style="display: block">A-Ö</p>
+          </button>
+          <button class="sorting_reverse_button sorting_button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12"
+              />
+            </svg>
+            <p class="sort_text" style="display: block">Ö-A</p>
+          </button>
+          <button class="sorting_newest_button sorting_button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+              />
+            </svg>
+            <p class="sort_text" style="display: block">Uusin</p>
+          </button>
+          <button class="sorting_oldest_button sorting_button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12l-3-3m0 0l-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+              />
+            </svg>
+            <p class="sort_text" style="display: block">Vanhin</p>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- media and admin content -->
+    <div
+      class="page_content overflow-auto absolute h-[calc(100%-112px)] w-[calc(100%-240px)]"
+      style="left: 240px"
+    >
+      <div
+        class="page_header text-2xl text-center font-medium mx-4 mt-20 xl:mt-10"
+      >
+        EMMIT - Hyvinvointia koko kehollesi
+      </div>
+      <div class="media_content h-fit text-xl font-medium">
+        <div class="media_list flex flex-wrap mt-20">
+          <div class="starter_images h-full w-full flex mt-20 justify-center">
+            <div class="starter_card music_link_starter">
+              <p>Audiot</p>
+              <img
+                class="starter_card_image"
+                src="media/images/audio-612x612.jpg"
+                alt="pic of media"
+              />
+            </div>
+            <div class="starter_card video_link_starter">
+              <p>Videot</p>
+              <img
+                class="starter_card_image"
+                src="media/images/video_logo.jpg"
+                alt="pic of media"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- audio player section -->
+    <div
+      class="player-section h-28 absolute bottom-0 left-60 w-[calc(100%-240px)] flex justify-center items-center"
+      style="display: none"
+    >
+      <div
+        class="audio_player bg-slate-700 w-fit h-fit ml-10 pt-2 pb-2 border border-slate-600 rounded-2xl shadow-md shadow-slate-300"
+      >
+        <div class="song_title text-center"></div>
+        <div class="player flex items-center">
+          <audio class="music_player" src="">
+            <source src="" type="audio/mp3" />
+            <source src="" type="audio/mp4" />
+            <source src="" type="audio/aif" />
+            Your browser not support the audio element.
+          </audio>
+          <button class="play_button" onclick="play_audio()" id="play_button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-8 h-8 mx-2 hover:bg-slate-300 rounded-full hover:text-slate-600"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
+              />
+            </svg>
+          </button>
+          <button
+            class="pause_button"
+            onclick="pause_audio()"
+            id="pause_button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-8 h-8 mx-2 hover:bg-slate-300 rounded-full hover:text-slate-600"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </button>
+          <div class="time_line_box w-32">
+            <div class="song_time_line w-100% h-1.5 bg-slate-300 rounded-md">
+              <div
+                class="time_in_line bg-slate-500 rounded-md h-full w-0 transition-[width 0.1s linear]"
+              ></div>
+            </div>
+          </div>
+          <div
+            class="speaker_on_button"
+            onclick="audio_off()"
+            id="speaker_on_button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 ml-2 mr-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"
+              />
+            </svg>
+          </div>
+          <div
+            class="speaker_off_button"
+            onclick="audio_on()"
+            id="speaker_off_button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 ml-2 mr-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6l4.72-4.72a.75.75 0 011.28.531V19.94a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.395C2.806 8.757 3.63 8.25 4.51 8.25H6.75z"
+              />
+            </svg>
+          </div>
+
+          <input
+            class="w-20 mr-2"
+            type="range"
+            id="change_vol"
+            min="0"
+            max="100"
+            step="1"
+            value="100"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- video player section -->
+    <div
+      class="video_player_section flex items-center justify-center absolute h-full w-[calc(100%-240px)]"
+      style="display: none; right: 28px"
+    >
+      <div
+        class="video_player bg-slate-700 max-w-screen-2xl w-fit h-fit pt-2 pb-2 rounded-2xl border border-slate-600 shadow-md shadow-slate-300"
+      >
+        <video class="video_window p-2" controls>
+          <source src="" class="video_source" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+    <!-- admin section -->
+    <div
+      class="form_section flex flex-col absolute h-full w-[calc(100%-240px)]"
+      style="display: none; left: 240px"
+    >
+      <div class="admin_buttons flex justify-center w-full mt-10 xl:mt-20">
+        <button class="admin_audio_button form_selection_buttons">
+          Audiot
+        </button>
+        <button class="admin_video_button form_selection_buttons">
+          Videot
+        </button>
+        <button class="admin_add_button form_selection_buttons">Lisää</button>
+        <button class="admin_leave_button form_selection_buttons">
+          Poistu
+        </button>
+      </div>
+      <!-- media lists -->
+      <table class="admin_forms"></table>
+      <!-- media form -->
+      <div class="form_group w-full flex justify-center">
+        <form class="new_media_form w-1/3" style="display: none">
+          <div class="form_responce m-1 p-1 text-center font-bold"></div>
+          <div class="form_title m-2 p-2">
+            <p>Lisää uusi media. Täytä kaikki kohdat huolella.</p>
+            <p>(Älä käytä seuraavia merkkejä: "´`')</p>
+          </div>
+          <div class="input_area">
+            <label for="radio">Valitse median muoto:</label><br />
+            <input
+              type="radio"
+              id="audio"
+              name="mediaformat"
+              value="audio"
+              required
+            />
+            <label for="audio">Audio</label><br />
+            <input type="radio" id="video" name="mediaformat" value="video" />
+            <label for="video">Video</label><br />
+          </div>
+          <div class="input_area">
+            <label for="image">Kuva:</label><br />
+            <input
+              class="form_pictures"
+              type="file"
+              id="imagefile"
+              name="imagefile"
+              multiple
+              required
+            /><br />
+          </div>
+          <div class="input_area">
+            <label for="name">Nimi:</label><br />
+            <input type="text" id="name" name="name" required /><br />
+          </div>
+          <div class="input_area">
+            <label for="artist">Esittäjä:</label><br />
+            <input type="text" id="artist" name="artist" required /><br />
+          </div>
+          <div class="input_area">
+            <label for="description">Kuvaus:</label><br />
+            <textarea
+              rows="2"
+              cols="18"
+              id="description"
+              name="description"
+              required
+            ></textarea
+            ><br />
+          </div>
+          <div class="input_area">
+            <label for="length">kesto:</label><br />
+            <input type="text" id="length" name="length" required /><br />
+          </div>
+          <div class="input_area">
+            <label for="media">Tiedosto:</label><br />
+            <input
+              class="form_pictures"
+              type="file"
+              id="mediafile"
+              name="mediafile"
+              multiple
+              required
+            /><br />
+          </div>
+          <div class="form_button ml-2">
+            <button
+              id="upload_button"
+              class="form_selection_buttons"
+              type="submit"
+            >
+              Tallenna
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

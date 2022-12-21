@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@layer components {
+    .nav_linst li{
+        @apply m-auto 
+    }
+    .nav_list li a{
+        @apply shadow-md my-3 shadow-slate-300 border border-slate-600
+    }
+    .starter_card {
+        @apply w-72 h-80 mx-5 text-center rounded-2xl shadow-md my-3 shadow-slate-300 border border-slate-600 hover:bg-slate-600
+    }
+    .starter_card p {
+        @apply mt-3
+    };
+    .starter_card_image {
+        @apply w-64 h-60 my-5 mx-auto object-cover border rounded-xl
+    }
+    .playlist-card{
+        @apply flex w-80 h-full cursor-pointer p-2 m-3 border border-slate-600 rounded-2xl shadow-md shadow-slate-300
+        hover:bg-slate-600
+    }
+    .playlist-card-img{
+        @apply w-32 h-32 object-cover rounded-2xl
+    }
+    .playlist-card-info{
+        @apply w-full ml-3 relative
+    }
+    .playlist-card-name{
+        @apply w-full h-auto  text-sm pt-2
+    }
+    .playlist-card-artist{
+        @apply w-full text-xs text-slate-400 pb-2
+    }
+    .playlist-card-description{
+        @apply w-full text-xs
+    }
+    .playlist-card-length{
+        @apply w-fit text-xs absolute bottom-0 right-3
+    }
+    .form_selection_buttons{
+        @apply w-24 m-1 p-0.5 h-7 mb-12 rounded-xl shadow-md shadow-slate-300 border border-slate-600
+    }
+    .form_list_images {
+        @apply w-12 h-12 object-cover rounded-2xl
+    }
+    th {
+        @apply text-left pb-3
+    }
+    td {
+        @apply text-left pb-1 text-sm
+    }
+    .input_area {
+        @apply m-2 px-4 py-3 rounded-2xl border border-slate-600 shadow-sm shadow-slate-300
+    }
+    input, textarea {
+        @apply text-slate-700 rounded-md
+    }
+    .form_pictures {
+        @apply text-slate-300
+    }
+    .remove_index {
+        @apply rounded-md border border-slate-600 shadow-sm shadow-slate-300 w-12 h-7 hover:bg-slate-600
+    }
+    .sorting_button{
+        @apply w-20 m-1 p-0.5 h-7 rounded-lg text-xs shadow-md shadow-slate-300 border border-slate-600
+         flex items-center justify-start
+        hover:bg-slate-600
+    }
+    .sorting_button svg {
+        @apply mx-1
+    }
+    .sort_text {
+        @apply ml-1
+    }
+};
+@tailwind utilities;

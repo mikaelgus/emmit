@@ -59,6 +59,9 @@ sortingArea.style.display = "none";
 let media = [];
 let mediaSort = "";
 
+//user or admin
+let isUser = true;
+
 //JSON files
 let audioFiles = "audio.json";
 let videoFiles = "video.json";
@@ -71,16 +74,24 @@ async function getJSON(mediaData, who) {
   mediaSort = mediaData;
   console.log("mitä array sisältää", media);
   if (mediaData == audioFiles && who == "user") {
-    console.log("musiikkia luvassa");
+    isUser = true;
+    console.log("musiikkia luvassa", isUser);
+
     printMedia("mus");
   } else if (mediaData == videoFiles && who == "user") {
-    console.log("videoita tulossa");
+    isUser = true;
+    console.log("videoita tulossa", isUser);
+
     printMedia("vid");
   } else if (mediaData == audioFiles && who == "admin") {
-    console.log("musiikkia listataan");
+    isUser = false;
+    console.log("musiikkia listataan", isUser);
+
     printAdminMedia("mus");
   } else if (mediaData == videoFiles && who == "admin") {
-    console.log("videoita listataan");
+    isUser = false;
+    console.log("videoita listataan", isUser);
+
     printAdminMedia("vid");
   }
 }
@@ -181,38 +192,66 @@ let sendMedClass = "";
 //sort by name a-ö
 sortName.onclick = () => {
   sortMedia();
+  console.log("WHAT IS USER? ", isUser);
   mediaSort == "audio.json" ? (sendMedClass = "mus") : (sendMedClass = "vid");
-  printMedia(sendMedClass);
+  if (isUser == true) {
+    printMedia(sendMedClass);
+  } else if (isUser == false) {
+    printAdminMedia(sendMedClass);
+  }
 };
 //sort by name ö-a
 sortReverse.onclick = () => {
   sortMedia();
   media.reverse();
   mediaSort == "audio.json" ? (sendMedClass = "mus") : (sendMedClass = "vid");
-  printMedia(sendMedClass);
+  if (isUser == true) {
+    printMedia(sendMedClass);
+  } else if (isUser == false) {
+    printAdminMedia(sendMedClass);
+  }
 };
 let getFiles;
 //sort by age newest
 sortNew.onclick = () => {
   mediaSort == "audio.json" ? (getFiles = audioFiles) : (getFiles = videoFiles);
   console.log("media json", media);
-  getJSON(getFiles, "user")
-    .then(function () {
-      media.reverse();
-      console.log("media json käännetty", media);
-    })
-    .then(function () {
-      mediaSort == "audio.json"
-        ? (sendMedClass = "mus")
-        : (sendMedClass = "vid");
-      printMedia(sendMedClass);
-    });
+  if (isUser == true) {
+    getJSON(getFiles, "user")
+      .then(function () {
+        media.reverse();
+        console.log("media json käännetty", media);
+      })
+      .then(function () {
+        mediaSort == "audio.json"
+          ? (sendMedClass = "mus")
+          : (sendMedClass = "vid");
+        printMedia(sendMedClass);
+      });
+  } else if (isUser == false) {
+    getJSON(getFiles, "admin")
+      .then(function () {
+        media.reverse();
+        console.log("media json käännetty", media);
+      })
+      .then(function () {
+        mediaSort == "audio.json"
+          ? (sendMedClass = "mus")
+          : (sendMedClass = "vid");
+        printAdminMedia(sendMedClass);
+      });
+  }
 };
 //sort by age oldest
 sortOld.onclick = () => {
   mediaSort == "audio.json" ? (getFiles = audioFiles) : (getFiles = videoFiles);
   console.log("media json", media);
-  getJSON(getFiles, "user");
+  console.log("sort old user", isUser);
+  if (isUser == true) {
+    getJSON(getFiles, "user");
+  } else if (isUser == false) {
+    getJSON(getFiles, "admin");
+  }
 };
 
 //close video player
@@ -466,6 +505,7 @@ adminLink.onclick = (e) => {
     closeVideoPlayer();
     closeAudioPlayer();
     playerSection.style.display = "none";
+    sortingArea.style.display = "none";
     pageHeader.innerHTML = "Lisää tai poista audio tai video";
     mediaList.innerHTML = "";
     formSection.style.display = "flex";
@@ -480,6 +520,7 @@ adminAudioBtn.onclick = (e) => {
   newMediaForm.style.display = "none";
   console.log("Admin listaa audio");
   getJSON(audioFiles, "admin");
+  sortingArea.style.display = "block";
 };
 //admin list video
 adminVideoBtn.onclick = (e) => {
@@ -487,11 +528,13 @@ adminVideoBtn.onclick = (e) => {
   newMediaForm.style.display = "none";
   console.log("Admin listaa videot");
   getJSON(videoFiles, "admin");
+  sortingArea.style.display = "block";
 };
 //admin add media
 adminAddBtn.onclick = (e) => {
   e.preventDefault();
   console.log("Admin lisää media");
+  sortingArea.style.display = "none";
   storeMedia();
 };
 //admin leave

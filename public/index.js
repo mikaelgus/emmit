@@ -41,6 +41,11 @@ const speakerOnButton = document.querySelector("#speaker_on_button");
 const speakerOffButton = document.querySelector("#speaker_off_button");
 const volumeSlider = document.querySelector("#change_vol");
 
+const adminModal = document.querySelector(".admin_modal");
+const closeAdminModal = document.querySelector(".close_admin_modal");
+const adminPswd = document.querySelector(".admin_password");
+const pswdError = document.querySelector(".password_error");
+
 const formSection = document.querySelector(".form_section");
 const adminAudioBtn = document.querySelector(".admin_audio_button");
 const adminVideoBtn = document.querySelector(".admin_video_button");
@@ -493,10 +498,13 @@ async function uploadFiles(e) {
 }
 
 //show admin panel
+
 adminLink.onclick = (e) => {
   e.preventDefault();
+  adminModal.style.display = "block";
+
   //alert("Anna admin-salasana");
-  const password = prompt("Anna admin salasana: ");
+  /*  const password = prompt("Anna admin salasana: ");
   if (password == "metka") {
     console.log("Oikein");
     closeVideoPlayer();
@@ -509,8 +517,41 @@ adminLink.onclick = (e) => {
   } else {
     console.log("Väärin");
     alert("Emmit ei tunnista salasanaa!");
+  } */
+};
+//check admin pasword
+const checkPassword = (e) => {
+  e.preventDefault();
+  const checkPswd = document.getElementById("password").value;
+  if (checkPswd == "metka") {
+    console.log("Oikein");
+    closeVideoPlayer();
+    closeAudioPlayer();
+    adminModal.style.display = "none";
+    playerSection.style.display = "none";
+    sortingArea.style.display = "none";
+    pageHeader.innerHTML = "Lisää tai poista audio tai video";
+    mediaList.innerHTML = "";
+    formSection.style.display = "flex";
+  } else {
+    console.log("Väärin");
+    //alert("Emmit ei tunnista salasanaa!");
+    adminModal.style.display = "block";
+    pswdError.innerHTML = "Emmit ei tunnista salasanaa!";
   }
 };
+
+//close admin password modal
+closeAdminModal.onclick = () => {
+  adminModal.style.display = "none";
+};
+//close admin password modal out side of modal
+window.onclick = function (e) {
+  if (e.target == adminModal) {
+    adminModal.style.display = "none";
+  }
+};
+
 //admin list audio
 adminAudioBtn.onclick = (e) => {
   e.preventDefault();
@@ -596,3 +637,4 @@ musicPlayer.addEventListener("timeupdate", updatetime);
 songTimeLine.addEventListener("click", setTime);
 volumeSlider.addEventListener("change", setVolume);
 uploadButton.addEventListener("click", uploadFiles);
+adminPswd.addEventListener("submit", checkPassword);

@@ -58,6 +58,7 @@ const newMediaForm = document.querySelector(".new_media_form");
 const uploadButton = document.querySelector("#upload_button");
 const formResponce = document.querySelector(".form_responce");
 
+//some displays
 pauseButton.style.display = "none";
 speakerOffButton.style.display = "none";
 sortingArea.style.display = "none";
@@ -90,24 +91,16 @@ async function getJSON(mediaData) {
   mediaSort = mediaData;
   console.log("mitä array sisältää", media);
   if (mediaData == audioFiles && isUser == true) {
-    //isUser = true;
     //console.log("musiikkia luvassa", isUser);
-
     printMedia("mus");
   } else if (mediaData == videoFiles && isUser == true) {
-    //isUser = true;
     //console.log("videoita tulossa", isUser);
-
     printMedia("vid");
   } else if (mediaData == audioFiles && isUser == false) {
-    //isUser = false;
     //console.log("musiikkia listataan", isUser);
-
     printAdminMedia("mus");
   } else if (mediaData == videoFiles && isUser == false) {
-    //isUser = false;
     //console.log("videoita listataan", isUser);
-
     printAdminMedia("vid");
   }
 }
@@ -155,7 +148,7 @@ menuBtn.onclick = () => {
   }
 };
 
-//print music and audio cards
+//print music cards
 musicLink.onclick = (e) => {
   e.preventDefault();
   if (isUser == true) {
@@ -172,7 +165,6 @@ const showMusic = () => {
   formSection.style.display = "none";
   sortingArea.style.display = "block";
   closeVideoPlayer();
-  //getJSON(audioFiles, "user");
   getJSON(audioFiles);
   //console.log("musalinkkiä painettu");
 };
@@ -190,15 +182,14 @@ videoLinkStarter.onclick = (e) => {
   e.preventDefault();
   showVideo();
 };
-function showVideo() {
+const showVideo = () => {
   formSection.style.display = "none";
   sortingArea.style.display = "block";
   closeVideoPlayer();
   closeAudioPlayer();
   getJSON(videoFiles);
-  //getJSON(videoFiles, "user");
   //console.log("videolinkkiä painettu");
-}
+};
 
 //sortMedia
 const sortMedia = () => {
@@ -360,13 +351,15 @@ function updatetime(e) {
   const timePercent = (currentTime / duration) * 100;
   timeInLine.style.width = `${timePercent}%`;
   //console.log(e.srcElement.duration);
+  if (timePercent == 100) {
+    pause_audio();
+  }
 }
 //click audio position
 function setTime(e) {
   const pointInLine = this.clientWidth;
   const clickX = e.offsetX;
   const duration = musicPlayer.duration;
-
   musicPlayer.currentTime = (clickX / pointInLine) * duration;
 }
 //set volume slider to 100
@@ -376,7 +369,7 @@ const audio_off = () => {
   speakerOnButton.style.display = "none";
   speakerOffButton.style.display = "block";
   volumeSliderValue = volumeSlider.value;
-  console.log("volume value: ", volumeSliderValue);
+  //console.log("volume value: ", volumeSliderValue);
   musicPlayer.volume = 0;
   volumeSlider.value = 0;
 };
@@ -435,14 +428,14 @@ const printAdminMedia = (medClass) => {
       "</td></tr>";
   }
 };
-//admin media store media form
+//open admin media store media form
 const storeMedia = () => {
   adminForms.innerHTML = "";
   newMediaForm.style.display = "block";
 };
 
 //get form data and send to store json
-function handleSubmit() {
+const handleSubmit = () => {
   const formDataJson = new FormData(newMediaForm);
   const medClass = formDataJson.get("mediaformat");
   const artist = formDataJson.get("artist");
@@ -456,11 +449,11 @@ function handleSubmit() {
   const length = formDataJson.get("length");
   const media = mediafile.files[0].name;
   const name = formDataJson.get("name");
-  console.log({ artist, description, image, length, media, name });
+  //console.log({ artist, description, image, length, media, name });
   const mediaInfo = { artist, description, image, length, media, name };
 
   return [mediaInfo, medClass];
-}
+};
 
 //store to json
 async function storeJson(data, medClass) {
@@ -473,7 +466,7 @@ async function storeJson(data, medClass) {
   }
   const response = await fetch(fetchClass);
   const result = await response.json();
-  console.log("mitä dataa?", data);
+  //console.log("mitä dataa?", data);
   result.push(data);
   console.log("storeJson response", result);
   return result;
@@ -484,10 +477,8 @@ async function uploadFiles(e) {
   e.preventDefault();
   const submitdata = handleSubmit();
   const newJsonData = await storeJson(submitdata[0], submitdata[1]);
-
-  console.log("tuleeko json dataa?", newJsonData);
-  console.log("upload files activated");
-
+  //console.log("tuleeko json dataa?", newJsonData);
+  //console.log("upload files activated");
   const newMediaJson = JSON.stringify(submitdata[0]);
   const newFulllJson = JSON.stringify(newJsonData);
   let formData = new FormData();
@@ -519,7 +510,6 @@ async function uploadFiles(e) {
 }
 
 //show admin panel
-
 adminLink.onclick = (e) => {
   e.preventDefault();
   adminModal.style.display = "block";
@@ -542,8 +532,7 @@ const checkPassword = (e) => {
     lockClosed.style.display = "none";
     isUser = false;
   } else {
-    console.log("Väärin");
-    //alert("Emmit ei tunnista salasanaa!");
+    //console.log("Nyt ei ollut oikea");
     adminModal.style.display = "block";
     pswdError.innerHTML = "Emmit ei tunnista salasanaa!";
   }
@@ -567,8 +556,8 @@ adminAudioBtn.onclick = (e) => {
 };
 const printAdminAudio = () => {
   newMediaForm.style.display = "none";
-  console.log("Admin listaa audio");
-  getJSON(audioFiles, "admin");
+  //console.log("Admin listaa audio");
+  getJSON(audioFiles);
   sortingArea.style.display = "block";
 };
 
@@ -579,15 +568,15 @@ adminVideoBtn.onclick = (e) => {
 };
 const printAdminVideo = () => {
   newMediaForm.style.display = "none";
-  console.log("Admin listaa videot");
-  getJSON(videoFiles, "admin");
+  //console.log("Admin listaa videot");
+  getJSON(videoFiles);
   sortingArea.style.display = "block";
 };
 
 //admin add media
 adminAddBtn.onclick = (e) => {
   e.preventDefault();
-  console.log("Admin lisää media");
+  //console.log("Admin lisää media");
   sortingArea.style.display = "none";
   storeMedia();
 };
@@ -624,7 +613,7 @@ const removeMedia = (ind, med) => {
     })
       .then((res) => {
         console.log(res);
-        getJSON(removedList, "admin");
+        getJSON(removedList);
       })
       .catch((err) => ("Error occured", err));
   }

@@ -46,6 +46,8 @@ const closeAdminModal = document.querySelector(".close_admin_modal");
 const adminPswd = document.querySelector(".admin_password");
 const pswdError = document.querySelector(".password_error");
 
+const lockClosed = document.querySelector(".lock_closed");
+const lockOpen = document.querySelector(".lock_open");
 const formSection = document.querySelector(".form_section");
 const adminAudioBtn = document.querySelector(".admin_audio_button");
 const adminVideoBtn = document.querySelector(".admin_video_button");
@@ -67,34 +69,43 @@ let mediaSort = "";
 //user or admin
 let isUser = true;
 
+//admin lock svg
+if (isUser == true) {
+  lockOpen.style.display = "none";
+  lockClosed.style.display = "block";
+} else {
+  lockOpen.style.display = "block";
+  lockClosed.style.display = "none";
+}
+
 //JSON files
 let audioFiles = "audio.json";
 let videoFiles = "video.json";
 
 //get JSON data from file
-async function getJSON(mediaData, who) {
+async function getJSON(mediaData) {
   const responce = await fetch(mediaData);
   const mediaArray = await responce.json();
   media = mediaArray;
   mediaSort = mediaData;
   console.log("mitä array sisältää", media);
-  if (mediaData == audioFiles && who == "user") {
-    isUser = true;
+  if (mediaData == audioFiles && isUser == true) {
+    //isUser = true;
     //console.log("musiikkia luvassa", isUser);
 
     printMedia("mus");
-  } else if (mediaData == videoFiles && who == "user") {
-    isUser = true;
+  } else if (mediaData == videoFiles && isUser == true) {
+    //isUser = true;
     //console.log("videoita tulossa", isUser);
 
     printMedia("vid");
-  } else if (mediaData == audioFiles && who == "admin") {
-    isUser = false;
+  } else if (mediaData == audioFiles && isUser == false) {
+    //isUser = false;
     //console.log("musiikkia listataan", isUser);
 
     printAdminMedia("mus");
-  } else if (mediaData == videoFiles && who == "admin") {
-    isUser = false;
+  } else if (mediaData == videoFiles && isUser == false) {
+    //isUser = false;
     //console.log("videoita listataan", isUser);
 
     printAdminMedia("vid");
@@ -147,24 +158,33 @@ menuBtn.onclick = () => {
 //print music and audio cards
 musicLink.onclick = (e) => {
   e.preventDefault();
-  showMusic();
+  if (isUser == true) {
+    showMusic();
+  } else if (isUser == false) {
+    printAdminAudio();
+  }
 };
 musicLinkStarter.onclick = (e) => {
   e.preventDefault();
   showMusic();
 };
-function showMusic() {
+const showMusic = () => {
   formSection.style.display = "none";
   sortingArea.style.display = "block";
   closeVideoPlayer();
-  getJSON(audioFiles, "user");
+  //getJSON(audioFiles, "user");
+  getJSON(audioFiles);
   //console.log("musalinkkiä painettu");
-}
+};
 
 //print video cards
 videoLink.onclick = (e) => {
   e.preventDefault();
-  showVideo();
+  if (isUser == true) {
+    showVideo();
+  } else if (isUser == false) {
+    printAdminVideo();
+  }
 };
 videoLinkStarter.onclick = (e) => {
   e.preventDefault();
@@ -175,7 +195,8 @@ function showVideo() {
   sortingArea.style.display = "block";
   closeVideoPlayer();
   closeAudioPlayer();
-  getJSON(videoFiles, "user");
+  getJSON(videoFiles);
+  //getJSON(videoFiles, "user");
   //console.log("videolinkkiä painettu");
 }
 
@@ -221,7 +242,7 @@ sortNew.onclick = () => {
   mediaSort == "audio.json" ? (getFiles = audioFiles) : (getFiles = videoFiles);
   //console.log("media json", media);
   if (isUser == true) {
-    getJSON(getFiles, "user")
+    getJSON(getFiles)
       .then(function () {
         media.reverse();
         //console.log("media json käännetty", media);
@@ -233,7 +254,7 @@ sortNew.onclick = () => {
         printMedia(sendMedClass);
       });
   } else if (isUser == false) {
-    getJSON(getFiles, "admin")
+    getJSON(getFiles)
       .then(function () {
         media.reverse();
         //console.log("media json käännetty", media);
@@ -502,22 +523,6 @@ async function uploadFiles(e) {
 adminLink.onclick = (e) => {
   e.preventDefault();
   adminModal.style.display = "block";
-
-  //alert("Anna admin-salasana");
-  /*  const password = prompt("Anna admin salasana: ");
-  if (password == "metka") {
-    console.log("Oikein");
-    closeVideoPlayer();
-    closeAudioPlayer();
-    playerSection.style.display = "none";
-    sortingArea.style.display = "none";
-    pageHeader.innerHTML = "Lisää tai poista audio tai video";
-    mediaList.innerHTML = "";
-    formSection.style.display = "flex";
-  } else {
-    console.log("Väärin");
-    alert("Emmit ei tunnista salasanaa!");
-  } */
 };
 //check admin pasword
 const checkPassword = (e) => {
@@ -533,6 +538,9 @@ const checkPassword = (e) => {
     pageHeader.innerHTML = "Lisää tai poista audio tai video";
     mediaList.innerHTML = "";
     formSection.style.display = "flex";
+    lockOpen.style.display = "block";
+    lockClosed.style.display = "none";
+    isUser = false;
   } else {
     console.log("Väärin");
     //alert("Emmit ei tunnista salasanaa!");
@@ -555,19 +563,27 @@ window.onclick = function (e) {
 //admin list audio
 adminAudioBtn.onclick = (e) => {
   e.preventDefault();
+  printAdminAudio();
+};
+const printAdminAudio = () => {
   newMediaForm.style.display = "none";
   console.log("Admin listaa audio");
   getJSON(audioFiles, "admin");
   sortingArea.style.display = "block";
 };
+
 //admin list video
 adminVideoBtn.onclick = (e) => {
   e.preventDefault();
+  printAdminVideo();
+};
+const printAdminVideo = () => {
   newMediaForm.style.display = "none";
   console.log("Admin listaa videot");
   getJSON(videoFiles, "admin");
   sortingArea.style.display = "block";
 };
+
 //admin add media
 adminAddBtn.onclick = (e) => {
   e.preventDefault();

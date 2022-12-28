@@ -467,11 +467,23 @@
           </div>
           <div class="input_area">
             <label for="name">Nimi:</label><br />
-            <input type="text" id="name" name="name" required /><br />
+            <input
+              type="text"
+              id="name"
+              name="name"
+              pattern="[A-Öa-ö0-9._-+!#€%&/()=?:;]"
+              required
+            /><br />
           </div>
           <div class="input_area">
             <label for="artist">Esittäjä:</label><br />
-            <input type="text" id="artist" name="artist" required /><br />
+            <input
+              type="text"
+              id="artist"
+              name="artist"
+              pattern="[A-Öa-ö0-9._-+!#€%&/()=?:;]"
+              required
+            /><br />
           </div>
           <div class="input_area">
             <label for="description">Kuvaus:</label><br />
@@ -480,22 +492,29 @@
               cols="18"
               id="description"
               name="description"
+              pattern="[A-Öa-ö0-9._-+!#€%&/()=?:;]"
               required
             ></textarea
             ><br />
           </div>
           <div class="input_area">
             <label for="length">kesto:</label><br />
-            <input type="text" id="length" name="length" required /><br />
+            <input
+              type="text"
+              id="length"
+              name="length"
+              pattern="[0-9.:]"
+              required
+            /><br />
           </div>
           <div class="input_area">
             <label for="media">Tiedosto:</label><br />
             <input
-              class="form_pictures"
+              class="form_media"
               type="file"
               id="mediafile"
               name="mediafile"
-              accept="audio/*, video/*"
+              accept=""
               required
             /><br />
           </div>

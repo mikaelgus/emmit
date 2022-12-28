@@ -46,6 +46,9 @@ const closeAdminModal = document.querySelector(".close_admin_modal");
 const adminPswd = document.querySelector(".admin_password");
 const pswdError = document.querySelector(".password_error");
 
+const radioAudio = document.querySelector("#audio");
+const radioVideo = document.querySelector("#video");
+
 const lockClosed = document.querySelector(".lock_closed");
 const lockOpen = document.querySelector(".lock_open");
 const formSection = document.querySelector(".form_section");
@@ -433,6 +436,15 @@ const storeMedia = () => {
   adminForms.innerHTML = "";
   newMediaForm.style.display = "block";
 };
+//correct accepts from audio/video radio button
+radioAudio.onclick = () => {
+  //console.log("audio painettu");
+  document.getElementById("mediafile").accept = "audio/*";
+};
+radioVideo.onclick = () => {
+  //console.log("video painettu");
+  document.getElementById("mediafile").accept = "video/*";
+};
 
 //get form data and send to store json
 const handleSubmit = () => {
@@ -637,6 +649,7 @@ const playVideo = (media, name) => {
   videoSource.src = `/media/${media}`;
   sortingArea.style.display = "none";
 };
+
 //listeners
 musicPlayer.addEventListener("timeupdate", updatetime);
 songTimeLine.addEventListener("click", setTime);

@@ -1,8 +1,11 @@
+"use strict";
+
 const menuBtn = document.querySelector(".menu_btn");
 const sidebar = document.querySelector(".sidebar");
 const navLinkUl = document.querySelector(".nav_list");
 const logoIcon = document.querySelector(".logo_icon");
 const logoName = document.querySelector(".logo_name");
+const upperContent = document.querySelector(".sidebar_upper_content");
 const linksName = document.querySelectorAll(".links_name");
 const musicLink = document.querySelector(".music_link");
 const videoLink = document.querySelector(".video_link");
@@ -46,8 +49,8 @@ const closeAdminModal = document.querySelector(".close_admin_modal");
 const adminPswd = document.querySelector(".admin_password");
 const pswdError = document.querySelector(".password_error");
 
-const radioAudio = document.querySelector("#audio");
-const radioVideo = document.querySelector("#video");
+const radioAudio = document.querySelector("#radio_audio");
+const radioVideo = document.querySelector("#radio_video");
 
 const lockClosed = document.querySelector(".lock_closed");
 const lockOpen = document.querySelector(".lock_open");
@@ -130,6 +133,7 @@ menuBtn.onclick = () => {
     menuBtn.style.left = "50%";
     videoPlayerSection.style.right = "94px";
     navLinkUl.style.padding = "0";
+    upperContent.style.visibility = "hidden";
   } else {
     for (let i = 0; i < linksName.length; i++) {
       linksName[i].style.display = "block";
@@ -148,6 +152,7 @@ menuBtn.onclick = () => {
     menuBtn.style.left = "85%";
     videoPlayerSection.style.right = "28px";
     navLinkUl.style.padding = "0 8px";
+    upperContent.style.visibility = "visible";
   }
 };
 
@@ -156,6 +161,7 @@ musicLink.onclick = (e) => {
   e.preventDefault();
   if (isUser == true) {
     showMusic();
+    emmitTune();
   } else if (isUser == false) {
     printAdminAudio();
   }
@@ -163,6 +169,7 @@ musicLink.onclick = (e) => {
 musicLinkStarter.onclick = (e) => {
   e.preventDefault();
   showMusic();
+  emmitTune();
 };
 const showMusic = () => {
   formSection.style.display = "none";
@@ -170,6 +177,11 @@ const showMusic = () => {
   closeVideoPlayer();
   getJSON(audioFiles);
   //console.log("musalinkkiä painettu");
+};
+//load Emmit tune
+const emmitTune = () => {
+  musicPlayer.src = "media/audio/emmit-tune-master.aif";
+  songTitle.innerHTML = "EMMIT audiosoitin";
 };
 
 //print video cards
@@ -339,6 +351,7 @@ const printMedia = (medClass) => {
 //show pause icon when audio playing
 const play_audio = () => {
   musicPlayer.play();
+  console.log("soitetaan biisiä");
   playButton.style.display = "none";
   pauseButton.style.display = "block";
 };
@@ -438,11 +451,11 @@ const storeMedia = () => {
 };
 //correct accepts from audio/video radio button
 radioAudio.onclick = () => {
-  //console.log("audio painettu");
+  console.log("audio painettu");
   document.getElementById("mediafile").accept = "audio/*";
 };
 radioVideo.onclick = () => {
-  //console.log("video painettu");
+  console.log("video painettu");
   document.getElementById("mediafile").accept = "video/*";
 };
 

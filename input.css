@@ -73,5 +73,8 @@
     .sort_text {
         @apply ml-1
     }
+    .upper_logo {
+        @apply px-6 py-1.5
+    }
 };
 @tailwind utilities;

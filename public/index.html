@@ -12,7 +12,36 @@
     <div
       class="sidebar fixed top-0 left-0 h-full w-44 bg-slate-800 text-slate-50 py-3.5 mx-2 border-x-2 border-slate-600"
     >
-      <div class="sidebar_content mt-60">
+      <div class="sidebar_upper_content h-52" style="visibility: visible">
+        <div class="project_logo_content flex flex-col">
+          <div class="upper_logo urlus">
+            <img
+              src="media/images/Urlus_logo_transp_reunus_360.png"
+              alt="Urlus logo"
+            />
+          </div>
+
+          <div class="upper_logo metropolia">
+            <img
+              src="media/images/metropolia_s_white.png"
+              alt="Metropolia logo"
+            />
+          </div>
+          <div class="upper_logo metka">
+            <img
+              src="media/images/Metka_Simple_RGB_White.png"
+              alt="Metka logo"
+            />
+          </div>
+          <div class="upper_logo myactive">
+            <img
+              src="media/images/myactive-tunnus-vaaka_w1920-1.png"
+              alt="MyActive campus logo"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="sidebar_content mt-52">
         <div class="logo_content flex justify-between w-full h-10 px-2">
           <div class="logo">
             <svg
@@ -291,9 +320,9 @@
       <div
         class="audio_player bg-slate-700 w-fit h-fit ml-10 pt-2 pb-2 border border-slate-600 rounded-2xl shadow-md shadow-slate-300"
       >
-        <div class="song_title text-center">EMMIT audiosoitin</div>
+        <div class="song_title text-center"></div>
         <div class="player flex items-center">
-          <audio class="music_player" src="media/audio/emmit-tune-master.aif">
+          <audio class="music_player" src="">
             <source src="" type="audio/mp3" />
             <source src="" type="audio/mp4" />
             <source src="" type="audio/aif" />
@@ -439,19 +468,24 @@
           <div class="form_responce m-1 p-1 text-center font-bold"></div>
           <div class="form_title m-2 p-2">
             <p>Lisää uusi media. Täytä kaikki kohdat huolella.</p>
-            <p>(Älä käytä seuraavia merkkejä: "´`')</p>
+            <p>(Mediatiedosto ei voi seuraavia merkkejä: "´`')</p>
           </div>
           <div class="input_area">
             <label for="radio">Valitse median muoto:</label><br />
             <input
               type="radio"
-              id="audio"
+              id="radio_audio"
               name="mediaformat"
               value="audio"
               required
             />
             <label for="audio">Audio</label><br />
-            <input type="radio" id="video" name="mediaformat" value="video" />
+            <input
+              type="radio"
+              id="radio_video"
+              name="mediaformat"
+              value="video"
+            />
             <label for="video">Video</label><br />
           </div>
           <div class="input_area">

@@ -60,7 +60,11 @@ const adminVideoBtn = document.querySelector(".admin_video_button");
 const adminAddBtn = document.querySelector(".admin_add_button");
 const adminLeaveBtn = document.querySelector(".admin_leave_button");
 const adminForms = document.querySelector(".admin_forms");
+const formGroup = document.querySelector(".form_group");
+const modifyMediaDiv = document.querySelector(".modify_media_div");
+const modifyButton = document.querySelector("#modify_button");
 const newMediaForm = document.querySelector(".new_media_form");
+const modifyMediaForm = document.querySelector(".modify_media_form");
 const uploadButton = document.querySelector("#upload_button");
 const formResponce = document.querySelector(".form_responce");
 
@@ -162,6 +166,8 @@ musicLink.onclick = (e) => {
   if (isUser == true) {
     showMusic();
     emmitTune();
+    pause_audio();
+    timeInLine.style.width = `0%`;
   } else if (isUser == false) {
     printAdminAudio();
   }
@@ -170,6 +176,7 @@ musicLinkStarter.onclick = (e) => {
   e.preventDefault();
   showMusic();
   emmitTune();
+  pause_audio();
 };
 const showMusic = () => {
   formSection.style.display = "none";
@@ -417,7 +424,7 @@ const printAdminMedia = (medClass) => {
   console.log("Printataan", medClass);
   adminForms.innerHTML = "";
   adminForms.innerHTML +=
-    "<tr><th>Kuva</th><th>Nimi</th><th>Esittäjä</th><th>Kuvaus</th><th>Kesto</th><th>File</th><th>Poista</th></tr>";
+    "<tr><th>Kuva</th><th>Nimi</th><th>Esittäjä</th><th>Kuvaus</th><th>Kesto</th><th>File</th><th>Muokkaa</th><th>Poista</th></tr>";
 
   for (let i in media) {
     adminForms.innerHTML +=
@@ -433,6 +440,14 @@ const printAdminMedia = (medClass) => {
       media[i].length +
       "</td><td>" +
       media[i].media +
+      "</td><td>" +
+      `<button class="modify_index" onclick="modifyMedia(` +
+      "`" +
+      `${i}` +
+      "`, `" +
+      `${medClass}` +
+      "`" +
+      `)">${i}</button>` +
       "</td><td>" +
       `<button class="remove_index" onclick="removeMedia(` +
       "`" +
@@ -550,7 +565,7 @@ const checkPassword = (e) => {
     adminModal.style.display = "none";
     playerSection.style.display = "none";
     sortingArea.style.display = "none";
-    pageHeader.innerHTML = "Lisää tai poista audio tai video";
+    pageHeader.innerHTML = "Lisää, muokkaa tai poista audio tai video";
     mediaList.innerHTML = "";
     formSection.style.display = "flex";
     lockOpen.style.display = "block";
@@ -581,6 +596,7 @@ adminAudioBtn.onclick = (e) => {
 };
 const printAdminAudio = () => {
   newMediaForm.style.display = "none";
+  modifyMediaForm.style.display = "none";
   //console.log("Admin listaa audio");
   getJSON(audioFiles);
   sortingArea.style.display = "block";
@@ -593,6 +609,7 @@ adminVideoBtn.onclick = (e) => {
 };
 const printAdminVideo = () => {
   newMediaForm.style.display = "none";
+  modifyMediaForm.style.display = "none";
   //console.log("Admin listaa videot");
   getJSON(videoFiles);
   sortingArea.style.display = "block";
@@ -602,6 +619,7 @@ const printAdminVideo = () => {
 adminAddBtn.onclick = (e) => {
   e.preventDefault();
   //console.log("Admin lisää media");
+  modifyMediaForm.style.display = "none";
   sortingArea.style.display = "none";
   storeMedia();
 };
@@ -611,7 +629,7 @@ adminLeaveBtn.onclick = () => {
 };
 
 //admin remove media
-const removeMedia = (ind, med) => {
+async function removeMedia(ind, med) {
   let confirmRemo = confirm("Haluatko varmasti poistaa median?");
   if (confirmRemo == true) {
     //console.log("poistetaan", ind);
@@ -632,17 +650,78 @@ const removeMedia = (ind, med) => {
       removedList = audioFiles;
     }
 
-    fetch("http://localhost:3003/json", {
+    await fetch("http://localhost:3003/json", {
       method: "POST",
       body: formData,
     })
       .then((res) => {
         console.log(res);
+        console.log("audio vai video json?", removedList);
         getJSON(removedList);
       })
       .catch((err) => ("Error occured", err));
   }
+}
+//print modify media form nad get index number
+let indexNumber;
+let mediaForm;
+const modifyMedia = (ind, med) => {
+  indexNumber = ind;
+  mediaForm = med;
+  console.log(
+    "modify media nappulaa painettu, index:",
+    indexNumber,
+    "ja media:",
+    mediaForm
+  );
+  console.log("tuleeko oikea objekti?", media[ind]);
+  adminForms.innerHTML = "";
+  modifyMediaForm.style.display = "block";
+  document.getElementById("modify_name").value = media[ind].name;
+  document.getElementById("modify_artist").value = media[ind].artist;
+  document.getElementById("modify_description").value = media[ind].description;
+  document.getElementById("modify_length").value = media[ind].length;
 };
+//save modified media json
+async function modifyFiles(e) {
+  e.preventDefault();
+  //console.log("medialuokka on", mediaForm);
+  //console.log("tallennetaan muokattu media json indexissä:", indexNumber);
+  const modifiedData = new FormData(modifyMediaForm);
+  const name = modifiedData.get("name");
+  const artist = modifiedData.get("artist");
+  const description = modifiedData.get("description");
+  const length = modifiedData.get("length");
+
+  media[indexNumber].name = name;
+  media[indexNumber].artist = artist;
+  media[indexNumber].description = description;
+  media[indexNumber].length = length;
+
+  const stringedJson = JSON.stringify(media);
+  const formData = new FormData();
+  let modifiedList;
+  formData.set("newjson", stringedJson);
+  if (mediaForm == "vid") {
+    formData.set("mediaformat", "video");
+    modifiedList = videoFiles;
+  }
+  if (mediaForm == "mus") {
+    formData.set("mediaformat", "audio");
+    modifiedList = audioFiles;
+  }
+  await fetch("http://localhost:3003/json", {
+    method: "POST",
+    body: formData,
+  })
+    .then((res) => {
+      console.log(res);
+      console.log("audio vai video json?", modifiedList);
+      document.querySelector(".modify_result").innerHTML = "Tiedot tallennettu";
+      //getJSON(modifiedList);
+    })
+    .catch((err) => ("Error occured", err));
+}
 
 //play an audio and show audio title
 const playAudio = (media, name) => {
@@ -668,4 +747,5 @@ musicPlayer.addEventListener("timeupdate", updatetime);
 songTimeLine.addEventListener("click", setTime);
 volumeSlider.addEventListener("change", setVolume);
 uploadButton.addEventListener("click", uploadFiles);
+modifyButton.addEventListener("click", modifyFiles);
 adminPswd.addEventListener("submit", checkPassword);

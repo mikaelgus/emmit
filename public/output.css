@@ -693,6 +693,7 @@ td {
 
 input, textarea {
   border-radius: 0.375rem;
+  padding-left: 0.25rem;
   --tw-text-opacity: 1;
   color: rgb(51 65 85 / var(--tw-text-opacity));
 }
@@ -702,6 +703,25 @@ input, textarea {
   color: rgb(203 213 225 / var(--tw-text-opacity));
 }
 
+.modify_index {
+  height: 1.75rem;
+  width: 3rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(71 85 105 / var(--tw-border-opacity));
+  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-shadow-color: #cbd5e1;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.modify_index:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(71 85 105 / var(--tw-bg-opacity));
+}
+
 .remove_index {
   height: 1.75rem;
   width: 3rem;
@@ -709,6 +729,8 @@ input, textarea {
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(71 85 105 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(127 29 29 / var(--tw-bg-opacity));
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -926,6 +948,10 @@ input, textarea {
   height: 100%;
 }
 
+.h-52 {
+  height: 13rem;
+}
+
 .h-10 {
   height: 2.5rem;
 }
@@ -965,10 +991,6 @@ input, textarea {
 
 .h-1 {
   height: 0.25rem;
-}
-
-.h-52 {
-  height: 13rem;
 }
 
 .min-h-screen {

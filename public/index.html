@@ -462,7 +462,76 @@
       </div>
       <!-- media lists -->
       <table class="admin_forms"></table>
-      <!-- media form -->
+      <!-- media forms -->
+      <!-- modify media form-->
+      <div class="modify_media_div form_group w-full flex justify-center">
+        <form class="modify_media_form w-1/3" style="display: none">
+          <div class="modify_result m-1 p-1 text-center font-bold"></div>
+          <div class="form_title m-2 p-2">
+            <p>Muokkaa tietoja.</p>
+          </div>
+
+          <div class="input_area">
+            <label for="image">Kuva:</label><br />
+            <p>Kuvaa ei voi vaihtaa tässä versiossa.</p>
+          </div>
+          <div class="input_area">
+            <label for="name">Nimi:</label><br />
+            <input
+              type="text"
+              id="modify_name"
+              name="name"
+              pattern="[A-Öa-ö0-9._-+!#€%&/()=?:;]"
+              required
+            /><br />
+          </div>
+          <div class="input_area">
+            <label for="artist">Esittäjä:</label><br />
+            <input
+              type="text"
+              id="modify_artist"
+              name="artist"
+              pattern="[A-Öa-ö0-9._-+!#€%&/()=?:;]"
+              required
+            /><br />
+          </div>
+          <div class="input_area">
+            <label for="description">Kuvaus:</label><br />
+            <textarea
+              rows="2"
+              cols="18"
+              id="modify_description"
+              name="description"
+              pattern="[A-Öa-ö0-9._-+!#€%&/()=?:;]"
+              required
+            ></textarea
+            ><br />
+          </div>
+          <div class="input_area">
+            <label for="length">Kesto:</label><br />
+            <input
+              type="text"
+              id="modify_length"
+              name="length"
+              required
+            /><br />
+          </div>
+          <div class="input_area">
+            <label for="media">Tiedosto:</label><br />
+            <p>Tiedostoa ei voi vaihtaa tässä versiossa.</p>
+          </div>
+          <div class="form_button ml-2">
+            <button
+              id="modify_button"
+              class="form_selection_buttons"
+              type="submit"
+            >
+              Tallenna
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- new media form -->
       <div class="form_group w-full flex justify-center">
         <form class="new_media_form w-1/3" style="display: none">
           <div class="form_responce m-1 p-1 text-center font-bold"></div>
@@ -532,7 +601,7 @@
             ><br />
           </div>
           <div class="input_area">
-            <label for="length">kesto:</label><br />
+            <label for="length">Kesto:</label><br />
             <input
               type="text"
               id="length"

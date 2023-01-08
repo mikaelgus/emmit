@@ -54,13 +54,16 @@
         @apply m-2 px-4 py-3 rounded-2xl border border-slate-600 shadow-sm shadow-slate-300
     }
     input, textarea {
-        @apply text-slate-700 rounded-md
+        @apply text-slate-700 rounded-md pl-1
     }
     .form_pictures, .form_media {
         @apply text-slate-300
     }
+    .modify_index {
+        @apply rounded-md  border border-slate-600 shadow-sm shadow-slate-300 w-12 h-7 hover:bg-slate-600
+    }
     .remove_index {
-        @apply rounded-md border border-slate-600 shadow-sm shadow-slate-300 w-12 h-7 hover:bg-slate-600
+        @apply rounded-md bg-red-900 border border-slate-600 shadow-sm shadow-slate-300 w-12 h-7 hover:bg-slate-600
     }
     .sorting_button{
         @apply w-20 m-1 p-0.5 h-7 rounded-lg text-xs shadow-md shadow-slate-300 border border-slate-600

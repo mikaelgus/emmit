@@ -130,6 +130,7 @@ menuBtn.onclick = () => {
       sortButtons[i].style.width = "30px";
     }
     pageContent.style.left = "104px";
+    pageContent.style.width = "calc(100% - 104px)";
     formSection.style.left = "104px";
     logoIcon.style.display = "none";
     logoName.style.display = "none";
@@ -149,6 +150,7 @@ menuBtn.onclick = () => {
       sortButtons[i].style.width = "80px";
     }
     pageContent.style.left = "240px";
+    pageContent.style.width = "calc(100% - 240px)";
     formSection.style.left = "240px";
     logoIcon.style.display = "flex";
     logoName.style.display = "flex";
@@ -187,7 +189,7 @@ const showMusic = () => {
 };
 //load Emmit tune
 const emmitTune = () => {
-  musicPlayer.src = "media/audio/emmit-tune-master.aif";
+  musicPlayer.src = "media/audio/emmit-tune-master.wav";
   songTitle.innerHTML = "EMMIT audiosoitin";
 };
 

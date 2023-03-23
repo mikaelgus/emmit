@@ -1,0 +1,1 @@
+start firefox --kiosk --private-window localhost:3003

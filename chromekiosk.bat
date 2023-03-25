@@ -1,0 +1,1 @@
+start chrome -kiosk -fullscreen http://localhost:3003

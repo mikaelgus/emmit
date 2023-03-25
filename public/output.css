@@ -821,8 +821,8 @@ input, textarea {
   left: 0px;
 }
 
-.top-1\/2 {
-  top: 50%;
+.top-1\/3 {
+  top: 33.333333%;
 }
 
 .bottom-0 {
@@ -847,18 +847,6 @@ input, textarea {
 
 .right-2 {
   right: 0.5rem;
-}
-
-.top-52 {
-  top: 13rem;
-}
-
-.top-1\/4 {
-  top: 25%;
-}
-
-.top-1\/3 {
-  top: 33.333333%;
 }
 
 .z-50 {
